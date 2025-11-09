@@ -9,3 +9,4 @@ How and why I write my code the way that I write it is that I section it by para
 
 # Module 1 Project    
 ## SWDV-110    
+The main details incorporated into this project was separating main.java into multiple parts having each one call to each other. The separated Javas are Character, GameUtils, Main, and Story. The story's text and events are located in story.java. All the player data is in character.java. The utility functions are inside gameutils.java. Each of the classes have a clear purpose and singular responsibility. For continuation of the project I can add new encounters or chapters with new methods or classes. What was added to the story was the "shringOfEchoes" part having the player experience things and gain some gold out of it. 
