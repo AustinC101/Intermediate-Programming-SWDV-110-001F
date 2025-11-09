@@ -5,7 +5,7 @@ import model.Character;
 public class Story {
   public void prologue(Character player) {
     System.out.println("\n~ ~ ~ Adventure Prologue ~ ~ ~");
-    System.out.println(player.getName() + " set out at dawn, " + player.get PronounPossAdj() + " pack light and hopes high.");
+    System.out.println(player.getName() + " set out at dawn, " + player.getPronounPossAdj() + " pack light and hopes high.");
     System.out.println("At only " + player.getAge() + " years old, " + player.getPronounSubj() + " already carries stories most dare not tell.");
     System.out.println("A pouch with " + player.getGold() + " gold coins jingles at " + player.getPronounPossAdj() + " side.");
     System.out.println("The Whispering Woods wait ahead, their shadows deep and their secrets older than time.");
