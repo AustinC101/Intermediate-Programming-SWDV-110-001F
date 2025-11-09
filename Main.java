@@ -9,7 +9,7 @@ public class Main {
 
         System.out.print("Enter your character's name: ");
         String name = in.nextLine();
-        System.out.print("Choose pronoun subject (he/she/they): "):
+        System.out.print("Choose pronoun subject (he/she/they): ");
         String subj = in.next();
         System.out.print("choose pronoun object (him/her/them): ");
         String obj = in.next();
@@ -29,9 +29,10 @@ public class Main {
         String[] inventory = {"sword", "map", "torch"};
         GameUtils.printInventory(inventory);
 
-        story.shrineOfEchoes(player);
+        story.shrineOfEchos(player);
 
         System.out.println("\nTotal gold after the Shrine: " + player.getGold());
         in.close();
     }
 }
+
