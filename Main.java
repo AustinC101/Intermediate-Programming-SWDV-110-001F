@@ -2,6 +2,13 @@ import java.util.Scanner;
 import model.Character;
 import story.Story;
 import utils.GameUtils;
+import story.nodes.EncounterNode;
+import story.nodes.KnowledgeNode;
+import story.nodes.NewChapterNode;
+import story.nodes.RewardNode;
+import story.nodes.ShrineNode;
+import story.nodes.SimpleEndingNode;
+import story.nodes.StoryNode;
 
 public class Main {
     public static void main(String[] args) {
@@ -23,15 +30,7 @@ public class Main {
         Character player = new Character(name, subj, obj, possAdj, age, 12, role);
         Story story = new Story();
 
-        story.prologue(player);
-        story.encounter(player, "Leshy");
-
-        String[] inventory = {"sword", "map", "torch"};
-        GameUtils.printInventory(inventory);
-
-        story.shrineOfEchos(player);
-
-        System.out.println("\nTotal gold after the Shrine: " + player.getGold());
+        story.run(player);
         in.close();
     }
 }

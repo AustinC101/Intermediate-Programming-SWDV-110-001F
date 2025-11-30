@@ -1,28 +1,58 @@
 package story;
 
+import story.nodes.EncounterNode;
+import story.nodes.KnowledgeNode;
+import story.nodes.NewChapterNode;
+import story.nodes.RewardNode;
+import story.nodes.ShrineNode;
+import story.nodes.SimpleEndingNode;
+import story.nodes.StoryNode;
 import model.Character;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Story {
-  public void prologue(Character player) {
-    System.out.println("\n~ ~ ~ Adventure Prologue ~ ~ ~");
-    System.out.println(player.getName() + " set out at dawn, " + player.getPronounPossAdj() + " pack light and hopes high.");
-    System.out.println("At only " + player.getAge() + " years old, " + player.getPronounSubj() + " already carries stories most dare not tell.");
-    System.out.println("A pouch with " + player.getGold() + " gold coins jingles at " + player.getPronounPossAdj() + " side.");
-    System.out.println("The Whispering Woods wait ahead, their shadows deep and their secrets older than time.");
-  }    
 
-  public void encounter(Character player, String creature) {
-    System.out.println("\nA " + creature + " emerges from the mist!");
-    System.out.println(player.getName() + " grips " + player.getPronounPossAdj() + " weapon, ready for battle.");
+  private StoryNode root;
+
+  public Story() {
+    StoryNode ending = new SimpleEndingNode();
+
+    StoryNode red = new RewardNode(ending);
+    StoryNode blue = new KnowledgeNode(ending);
+
+    StoryNode cavern = new NewChapterNode(blue, red);
+    StoryNode shrine = new ShrineNode(cavern);
+    StoryNode encounter = new EncounterNode("Leshy", shrine);
+
+    this.root = encounter;
   }
 
-  public void shrineOfEchos(Character player) {
-    System.out.println("\n~ ~ ~ The Shrine of Echoes ~ ~ ~");
-    System.out.println("After hours of walking, " + player.getName() + " discovers ancient ruins hidden beneath vines.");
-    System.out.println("Strange whispers call " + player.getPronounObj() + " closer, each echo sounding like " + player.getPronounPossAdj() + " own voice.");
-    System.out.println("On an altar rests a glowing gem. As " + player.getPronounSubj() + " reaches out, the gem dissolves into light and seeps into " + player.getPronounPossAdj() + " skin.");
-    System.out.println("Memories flood " + player.getPronounObj() + " mind-visions of heroes past and battles long forgotten.");
-    System.out.println(player.getName() + " feels a surge of power and gains 30 gold as a gift from the ancient spirits.");
-    player.addGold(30);
+  public void run(Character player) {
+    Scanner in = new Scanner(System.in);
+    StoryNode current = root;
+
+    while (current != null) {
+      current.display(player);
+
+      if (current.getChildren().isEmpty()) {
+        current = null;
+        break;
+      }
+
+      int choice = 1;
+      if (current.getChildren().size() > 1) {
+        System.out.print("Choose (1 or 2): ");
+        choice = in.nextInt();
+      }
+
+      current = current.next(player, choice);
+    }
+
+    System.out.println("\nStory contains " + root.countNodes() + " nodes total.");
+
+    ArrayList<String> titles = new ArrayList<>();
+    root.collectTitles(titles);
+    System.out.println("Node types encountered: " + titles);
   }
 }
