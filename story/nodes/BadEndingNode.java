@@ -4,16 +4,17 @@ import java.util.List;
 import java.util.ArrayList;
 import model.Character;
 
-public class SimpleEndingNode extends StoryNode {
+public class BadEndingNode extends StoryNode {
+
     @Override
     public void display(Character player) {
-        System.out.println("\n~ Journey Complete ~");
-        System.out.println(player.getName() + " steps back into the sunlight, changed forever.");
+        System.out.println("\n~ A Bitter End ~");
+        System.out.println("Greed caught up to " + player.getName() + ". The glitter was a trap.");
     }
 
     @Override
     public String getDisplayText(Character player) {
-        return "~ Journey Complete ~\n" + player.getName() + " steps back into the sunlight, changed forever.";
+        return "~ A Bitter End ~\nGreed caught up to " + player.getName() + ". The glitter was a trap.";
     }
 
     @Override

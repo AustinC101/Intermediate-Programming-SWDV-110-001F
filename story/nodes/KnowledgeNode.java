@@ -6,7 +6,7 @@ import model.Character;
 
 public class KnowledgeNode extends StoryNode {
     private StoryNode next;
-    
+
     public KnowledgeNode(StoryNode next) {
         this.next = next;
     }
@@ -19,10 +19,20 @@ public class KnowledgeNode extends StoryNode {
     }
 
     @Override
+    public String getDisplayText(Character player) {
+        return "You walk the Blue Tunnel...\nAncient runes glow and whisper forgotten secrets.\nYour wisdom deepens.";
+    }
+
+    @Override
     public List<StoryNode> getChildren() {
         ArrayList<StoryNode> list = new ArrayList<>();
         list.add(next);
         return list;
+    }
+
+    @Override
+    public java.util.List<String> getChoiceLabels() {
+        return java.util.Arrays.asList("Continue");
     }
 
     @Override

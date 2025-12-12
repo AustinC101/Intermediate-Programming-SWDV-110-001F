@@ -4,16 +4,17 @@ import java.util.List;
 import java.util.ArrayList;
 import model.Character;
 
-public class SimpleEndingNode extends StoryNode {
+public class ContinueEndingNode extends StoryNode {
+
     @Override
     public void display(Character player) {
-        System.out.println("\n~ Journey Complete ~");
-        System.out.println(player.getName() + " steps back into the sunlight, changed forever.");
+        System.out.println("\n~ To Be Continued ~");
+        System.out.println(player.getName() + " senses more beyond the horizon...");
     }
 
     @Override
     public String getDisplayText(Character player) {
-        return "~ Journey Complete ~\n" + player.getName() + " steps back into the sunlight, changed forever.";
+        return "~ To Be Continued ~\n" + player.getName() + " senses more beyond the horizon...";
     }
 
     @Override

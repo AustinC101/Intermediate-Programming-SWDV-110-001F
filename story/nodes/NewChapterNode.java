@@ -3,7 +3,6 @@ package story.nodes;
 import java.util.List;
 import java.util.ArrayList;
 import model.Character;
-import java.util.Scanner;
 
 public class NewChapterNode extends StoryNode {
     private StoryNode leftPath;
@@ -16,11 +15,15 @@ public class NewChapterNode extends StoryNode {
 
     @Override
     public void display(Character player) {
-        System.out.println("\n~ The Crystal Cavern ~");
-        System.out.println("Glittering walls hum with ancient power.");
-        System.out.println("Two paths diverge: one glowing blue, the other red.");
-        System.out.println("1) Enter the Blue Tunnel (mystic knowledge)");
-        System.out.println("2) Enter the Red Tunnel (danger & reward)");
+        System.out.println("\n~ A Fork in the Road ~");
+        System.out.println("Two paths diverge.");
+        System.out.println("1) Left");
+        System.out.println("2) Right");
+    }
+
+    @Override
+    public String getDisplayText(Character player) {
+        return "~ A Fork in the Road ~\nTwo paths diverge. Choose carefully.";
     }
 
     @Override
@@ -29,6 +32,11 @@ public class NewChapterNode extends StoryNode {
         kids.add(leftPath);
         kids.add(rightPath);
         return kids;
+    }
+
+    @Override
+    public java.util.List<String> getChoiceLabels() {
+        return java.util.Arrays.asList("Take Left Path", "Take Right Path");
     }
 
     @Override

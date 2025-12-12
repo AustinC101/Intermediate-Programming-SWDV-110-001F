@@ -14,3 +14,7 @@ The main details incorporated into this project was separating main.java into mu
 # Module 2 Project
 ## SWDV-110
 The details for this were to seperate story.java into multiple nodes in either an interface or an abstract class. Along with creating subclasses that overrides behavior. A new section was created to continue with the story along with modifying it so that it follows the current material. 
+
+# Final Project
+## SWDV-110
+The character is now given the choice to select different paths that the character then continues and experiences something along the path, or maybe continue along the same path.

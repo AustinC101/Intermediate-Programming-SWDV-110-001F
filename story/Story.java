@@ -7,52 +7,72 @@ import story.nodes.RewardNode;
 import story.nodes.ShrineNode;
 import story.nodes.SimpleEndingNode;
 import story.nodes.StoryNode;
+import story.nodes.BadEndingNode;
+import story.nodes.ContinueEndingNode;
 import model.Character;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Story {
+    private StoryNode root;
 
-  private StoryNode root;
+    public Story() {
 
-  public Story() {
-    StoryNode ending = new SimpleEndingNode();
+        StoryNode simpleEnding = new SimpleEndingNode();
+        StoryNode badEnding = new BadEndingNode();
+        StoryNode continueEnding = new ContinueEndingNode();
 
-    StoryNode red = new RewardNode(ending);
-    StoryNode blue = new KnowledgeNode(ending);
+        StoryNode shrineAfterRed = new ShrineNode(simpleEnding);
+        StoryNode shrineAfterBlue = new ShrineNode(continueEnding);
 
-    StoryNode cavern = new NewChapterNode(blue, red);
-    StoryNode shrine = new ShrineNode(cavern);
-    StoryNode encounter = new EncounterNode("Leshy", shrine);
+        StoryNode deepReward = new RewardNode(shrineAfterRed);        
+        StoryNode deepKnowledge = new KnowledgeNode(shrineAfterBlue); 
 
-    this.root = encounter;
-  }
+        StoryNode ambush = new EncounterNode("Goblin Ambush", deepReward);
+        StoryNode leshy = new EncounterNode("Leshy", ambush);
 
-  public void run(Character player) {
-    Scanner in = new Scanner(System.in);
-    StoryNode current = root;
+        StoryNode oddAlcove = new NewChapterNode(deepKnowledge, leshy);
 
-    while (current != null) {
-      current.display(player);
+        StoryNode oldLibrary = new KnowledgeNode(oddAlcove);
+        StoryNode hauntedPass = new EncounterNode("Wailing Shade", oddAlcove);
 
-      if (current.getChildren().isEmpty()) {
-        current = null;
-        break;
-      }
+        StoryNode rootFork = new NewChapterNode(oldLibrary, hauntedPass);
 
-      int choice = 1;
-      if (current.getChildren().size() > 1) {
-        System.out.print("Choose (1 or 2): ");
-        choice = in.nextInt();
-      }
+        StoryNode glitterPool = new RewardNode(badEnding); 
+        StoryNode temptingPath = new NewChapterNode(glitterPool, rootFork);
 
-      current = current.next(player, choice);
+        this.root = temptingPath;
     }
 
-    System.out.println("\nStory contains " + root.countNodes() + " nodes total.");
+    public StoryNode getRoot() {
+        return root;
+    }
 
-    ArrayList<String> titles = new ArrayList<>();
-    root.collectTitles(titles);
-    System.out.println("Node types encountered: " + titles);
-  }
+    public void run(Character player) {
+        java.util.Scanner in = new java.util.Scanner(System.in);
+        StoryNode current = root;
+
+        while (current != null) {
+            current.display(player);
+
+            if (current.getChildren().isEmpty()) {
+                current = null;
+                break;
+            }
+
+            int choice = 1;
+            if (current.getChildren().size() > 1) {
+                System.out.print("Choose (1 or 2): ");
+                choice = in.nextInt();
+            }
+
+            current = current.next(player, choice);
+        }
+
+        System.out.println("\nStory contains " + root.countNodes() + " nodes total.");
+
+        java.util.ArrayList<String> titles = new java.util.ArrayList<>();
+        root.collectTitles(titles);
+        System.out.println("Node types encountered: " + titles);
+    }
 }
